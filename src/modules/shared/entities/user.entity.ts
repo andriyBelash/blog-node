@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from "typeorm";
 
-@Entity()
+@Entity('users') 
 export class User {
     @PrimaryGeneratedColumn()
     id: number;
@@ -16,6 +16,9 @@ export class User {
 
     @Column({ default: 'user' })
     role: 'user' | 'admin'
+
+    @Column({ nullable: true })
+    picture_url: string;
 
     @CreateDateColumn()
     created_at: string;

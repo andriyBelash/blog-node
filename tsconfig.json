@@ -15,7 +15,9 @@
     "emitDecoratorMetadata": true,
     "strictPropertyInitialization": false,
     "skipLibCheck": true,
-    "baseUrl": ".",
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "baseUrl": "./src",
     "paths": {
       "@/*": ["src/*"]
     }

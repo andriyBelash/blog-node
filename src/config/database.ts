@@ -12,7 +12,6 @@ const __dirname = dirname(__filename);
 
 const { DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_DATABASE, NODE_ENV } = process.env;
 
-console.log(join(__dirname, "..", "migrations", "*.ts"))
 
 const AppDataSource = new DataSource({
     type: "mysql",

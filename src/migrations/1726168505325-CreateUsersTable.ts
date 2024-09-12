@@ -29,6 +29,11 @@ export class CreateUsersTable1631234567890 implements MigrationInterface {
                         type: "varchar",
                     },
                     {
+                        name: 'picture_url',
+                        type: 'varchar',
+                        isNullable: true,
+                    },
+                    {
                         name: "role",
                         type: "enum",
                         enum: ["user", "admin"],
@@ -53,8 +58,8 @@ export class CreateUsersTable1631234567890 implements MigrationInterface {
         const hashedPassword = await bcrypt.hash("password", 10);
 
         await queryRunner.query(`
-            INSERT INTO users (username, email, password, role)
-            VALUES ('admin', 'admin@mail.com', '${hashedPassword}', 'admin')
+            INSERT INTO users (username, email, password, picture_url, role)
+            VALUES ('admin', 'admin@mail.com', '${hashedPassword}', NULL, 'admin')
         `);
     }
 
