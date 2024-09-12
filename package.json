@@ -2,12 +2,13 @@
   "name": "blog",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start": "ts-node src/app.ts",
-    "dev": "nodemon --exec ts-node src/app.ts",
-    "migration:generate": "npm run typeorm migration:generate -- -d src/config/database.ts",
-    "migration:run": "npm run typeorm migration:run -- -d src/config/database.ts",
-    "migration:revert": "npm run typeorm migration:revert -- -d src/config/database.ts"
+    "start": "node --loader ts-node/esm src/app.ts",
+    "dev": "nodemon --exec node --loader ts-node/esm src/app.ts",
+    "migration:generate": "npx typeorm-ts-node-esm migration:generate -d src/config/database.ts",
+    "migration:run": "npx typeorm-ts-node-esm migration:run -d src/config/database.ts",
+    "migration:revert": "npx typeorm-ts-node-esm migration:revert -d src/config/database.ts"
   },
   "keywords": [],
   "author": "",

@@ -2,10 +2,9 @@ import 'reflect-metadata';
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import AppDataSource from './config/database';
+import AppDataSource from './config/database.js';
 
-import adminRoutes from './routes/admin.routes';
-import webRoutes from './routes/web.routes';
+import adminRoutes from './routes/admin.routes.js';
 
 const app = express();
 
