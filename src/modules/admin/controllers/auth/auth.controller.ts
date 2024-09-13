@@ -11,13 +11,11 @@ export class AuthController {
 
   public login = async (req: Request, res: Response) => {
     const { email, password } = req.body;
-    console.log(email, password);
     const errors = validationResult(req);
     
     if (errors.isEmpty()) {
       try {
         const result = await this.authServices.login(email, password);
-        console.log(result, 'RESULT');
         if (result) {
           res.json({
             message: 'Login successful',
@@ -27,7 +25,8 @@ export class AuthController {
               email: result.user.email,
               role: result.user.role
             },
-            token: result.token
+            access_token: result.access_token,
+            refresh_token: result.refresh_token
           });
         } else {
           res.status(401).json({ message: 'Invalid credentials' });
@@ -38,6 +37,28 @@ export class AuthController {
       }
     } else {
       res.status(422).json({errors: errors.array()});
+    }
+  }
+
+  public refreshToken = async (req: Request, res: Response) => {
+    const { token } = req.body
+    if(!token) {
+      return res.status(400).json({ message: 'Refresh token is required' })
+    }
+    try {
+      const result = await this.authServices.refreshToken(token);
+      if (result) {
+        res.json({
+          message: 'Token refreshed successfully',
+          access_token: result.access_token,
+          refresh_token: result.refresh_token
+        });
+      } else {
+        res.status(401).json({ message: 'Invalid refresh token' });
+      }
+    } catch (error) {
+      console.error('Refresh token error:', error);
+      res.status(500).json({ message: 'An error occurred while refreshing the token' });
     }
   }
 }
