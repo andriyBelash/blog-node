@@ -1,12 +1,12 @@
-import { UserServices } from "../../services/user/user.services.js";
+import { AuthServices } from "../../services/user/auth.services.js";
 import { Request, Response } from "express";
 import { validationResult } from 'express-validator'
 
 export class AuthController {
-  private authServices: UserServices;
+  private authServices: AuthServices;
 
   constructor() {
-    this.authServices = new UserServices();
+    this.authServices = new AuthServices();
   }
 
   public login = async (req: Request, res: Response) => {
