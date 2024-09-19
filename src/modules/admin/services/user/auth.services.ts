@@ -14,6 +14,7 @@ export class AuthServices {
 
   public async validateUser(email: string, password: string): Promise<User | null> {
     const user = await this.userRepository.findOne({ where: { email } })
+    console.log(user)
     if (user && await bcrypt.compare(password, user.password)) {
       return user;
     }
